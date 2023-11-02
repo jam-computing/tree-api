@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ayo mr white\\source\\repos\\TreeAPI\\TreeAPI.csproj": {}
+    "C:\\Users\\ayo mr white\\Documents\\GitHub\\tree.api\\TreeAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ayo mr white\\source\\repos\\TreeAPI\\TreeAPI.csproj": {
+    "C:\\Users\\ayo mr white\\Documents\\GitHub\\tree.api\\TreeAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ayo mr white\\source\\repos\\TreeAPI\\TreeAPI.csproj",
+        "projectUniqueName": "C:\\Users\\ayo mr white\\Documents\\GitHub\\tree.api\\TreeAPI.csproj",
         "projectName": "FriendsRobotics.TreeAPI",
-        "projectPath": "C:\\Users\\ayo mr white\\source\\repos\\TreeAPI\\TreeAPI.csproj",
+        "projectPath": "C:\\Users\\ayo mr white\\Documents\\GitHub\\tree.api\\TreeAPI.csproj",
         "packagesPath": "C:\\Users\\ayo mr white\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ayo mr white\\source\\repos\\TreeAPI\\obj\\",
+        "outputPath": "C:\\Users\\ayo mr white\\Documents\\GitHub\\tree.api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ayo mr white\\AppData\\Roaming\\NuGet\\NuGet.Config",

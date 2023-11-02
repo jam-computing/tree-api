@@ -20,7 +20,7 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="C:\Users\ayo mr white\source\repos\TreeAPI\bin\Debug\net7.0\TreeAPI.dll" target="lib\net7.0\TreeAPI.dll" />
+    <file src="C:\Users\ayo mr white\Documents\GitHub\tree.api\bin\Debug\net7.0\TreeAPI.dll" target="lib\net7.0\TreeAPI.dll" />
     <file src="C:\Users\ayo mr white\Desktop\README.md" target="\README.md" />
   </files>
 </package>

@@ -10,26 +10,26 @@ namespace TreeAPI;
 public class Tree : IDisposable
 {
     // The websocket object that is the connection between the server and client
-    public WebSocketSharp.WebSocket? WebSocket { get; set; } = null;
+    public WebSocket? WebSocket { get; set; } = null;
 
     // Returns true if a connection is valid
-    public bool? IsConnected  => this.WebSocket?.IsAlive;
+    public bool? IsConnected => this.WebSocket?.IsAlive;
 
     // This is used to store the message that COULD be received from the server
     public string? ReceivedMessage { get; private set; } = null;
-    
+
     // Empty ctor ( That's all! )
-    public Tree() {}
+    public Tree() { }
 
     // If the user gives an Addr in the ctor, just connect right away
     public Tree(IpAddr ip) => Connect(ip);
-    
+
     public ReturnValue Connect(string IP, int port, string path)
     {
         // This will connect to the server with some specified ip details
         // Not recommended to use this, instead use the IpAddr object
-        
-        if(IsConnected is not null or true)
+
+        if (IsConnected is not null or true)
             WebSocket?.Close();
 
         Console.WriteLine("Connecting...");
@@ -47,17 +47,22 @@ public class Tree : IDisposable
         {
             return ReturnValue.Failure;
         }
-        
+
         // Print some stuff to console
         Console.WriteLine("Connected to server at: " + IP + ". at port: " + port);
 
         return ReturnValue.Success;
     }
 
-    public ReturnValue Connect(IpAddr ip)
+    public ReturnValue Connect(IpAddr? ip = null)
     {
+        // Get sane defaults if no ip is explicily given
+        if (ip is null)
+        {
+            ip = ConfigManager.GetIpAddr();
+        }
         // If there is already a connection, close it down
-        if(IsConnected is not null or true)
+        if (IsConnected is not null or true)
             WebSocket?.Close();
 
         Console.WriteLine("Connecting...");
@@ -79,7 +84,7 @@ public class Tree : IDisposable
         }
 
         // Print out some debug info
-        Console.WriteLine("Connected to server at:" + ip.ToString()); 
+        Console.WriteLine("Connected to server at:" + ip.ToString());
 
         return ReturnValue.Success;
     }
@@ -128,11 +133,11 @@ public class Tree : IDisposable
         Console.WriteLine("Sending Frame");
 
         sendable.Name += "-frame";
-        
+
         this.Connect("CreateFile".GetIp());
         this.Send(sendable);
     }
-    
+
     public void CreateAnimationFile(Animation sendable)
     {
         // This will tell the server to create a Animation file ( json ) on the server disk from the specified object
@@ -140,7 +145,7 @@ public class Tree : IDisposable
         Console.WriteLine("Sending Animation");
 
         sendable.Name += "-animation";
-        
+
         this.Connect("CreateFile".GetIp());
         this.Send(sendable);
     }
