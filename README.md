@@ -5,7 +5,7 @@
     A Simple API to commicate with a christmas tree running a TreeServer
 </div>
 
-## Install
+## Install ##
 
 ### NuGet ###
 
@@ -22,9 +22,9 @@ FriendsRobotics.TreeAPI
 ```
 
 
-## Usage
+## Usage ##
 
-Let's get started!
+### Configuration ###
 
 Drop a `using` at the start to import the API
 
@@ -35,7 +35,7 @@ using TreeAPI;
 To get started, configure your settings 
 
 ```cs
-// This should be the tree's api
+// This should be the tree's Ip Address
 ConfigManager.IP = "127.0.0.1"; 
 
 // This should be the path you are connecting to.
@@ -48,7 +48,7 @@ ConfigManager.Port = 1234;
 
 Alternatively, you can use `ClientConfig` if you wish to use a config file.
 
-## Connecting to the tree
+### Connecting to the tree ###
 
 It is easiest to wrap the tree in a `using` statement as it will automatically close the sockets when you are finished.
 
@@ -66,7 +66,7 @@ tree.Connect();
 
 _N.B. If you wish to connect to mutliple different paths without having to usee the ConfigManager, there is an `IpAddr` class for you to mess around with_
 
-## Sending some data to the tree
+### Sending some data to the tree ###
 
 Sending data is pretty rudimentary:
 
@@ -80,7 +80,7 @@ If you want to capture the response from the tree, there is a `ReceivedMessage` 
 Console.WriteLine( tree.ReceivedMessage );
 ```
 
-## Sending Frames and Animations
+### Sending Frames and Animations ###
 
 To send some useful data, you need an `ISendable` object, effectively either a `Frame` or a `Animation`.
 
