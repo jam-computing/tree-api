@@ -13,16 +13,25 @@ public class Tree : IDisposable
     public WebSocket? WebSocket { get; set; } = null;
 
     // Returns true if a connection is valid
-    public bool? IsConnected => this.WebSocket?.IsAlive;
+    public bool? IsConnected => WebSocket?.IsAlive;
+    public event EventHandler? OnConnectionClosed;
+    public event EventHandler? OnError;
+    public event EventHandler? OnMessageReceived;
 
     // This is used to store the message that COULD be received from the server
     public string? ReceivedMessage { get; private set; } = null;
 
     // Empty ctor ( That's all! )
-    public Tree() { }
+    public Tree() { 
+        
+    }
 
     // If the user gives an Addr in the ctor, just connect right away
     public Tree(IpAddr ip) => Connect(ip);
+
+    private void setupbindings()
+    {
+    }
 
     public ReturnValue Connect(string IP, int port, string path)
     {
@@ -47,6 +56,11 @@ public class Tree : IDisposable
         {
             return ReturnValue.Failure;
         }
+        
+        WebSocket.OnError += (s, e) =>
+        {
+            OnError?.Invoke(s, e);
+        };
 
         // Print some stuff to console
         Console.WriteLine("Connected to server at: " + IP + ". at port: " + port);
@@ -58,9 +72,8 @@ public class Tree : IDisposable
     {
         // Get sane defaults if no ip is explicily given
         if (ip is null)
-        {
             ip = ConfigManager.GetIpAddr();
-        }
+
         // If there is already a connection, close it down
         if (IsConnected is not null or true)
             WebSocket?.Close();
@@ -73,7 +86,19 @@ public class Tree : IDisposable
             // Create the websocket with the ip provided
             WebSocket = new WebSocket(ip.ToString());
             // Make sure to capture the message when received
-            WebSocket.OnMessage += GetMessage!;
+            WebSocket.OnMessage += (s, e) =>
+            {
+                GetMessage(s, e);
+                OnMessageReceived?.Invoke(s, e);
+            };
+            WebSocket.OnError += (s, e) =>
+            {
+                OnError?.Invoke(s, e);
+            };
+            WebSocket.OnClose += (s, e) =>
+            {
+                OnConnectionClosed?.Invoke(s, e);
+            };
             // Connect!
             WebSocket.Connect();
 
